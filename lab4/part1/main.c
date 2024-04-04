@@ -5,6 +5,8 @@
 
 int globalNotInit;
 int globalInit = 4;
+const int globalConstInit = 6;
+const int globalConstNotInit;
 
 
 int localFunc() {
@@ -32,7 +34,8 @@ void tmpFunc() {
     char *buf1 = (char *) malloc(100);
     strcpy(buf1, "hello world1");
     printf("buf1 in func: %s\n", buf1);
-//    buf1 += 50;
+    buf1 += 50;
+//    sleep(100);
     free(buf1);
     printf("buf1 in func after move pointer: %s\n", buf1);
 }
@@ -69,12 +72,13 @@ void workWithEnvVar() {
 
 }
 
-
 int main() {
     printf("my PID: %d\n", getpid());
     localFunc();
-    printf("global init var in func: %p\n", &globalInit);
-    printf("global not init var in func: %p\n", &globalNotInit);
+    printf("global init var: %p\n", &globalInit);
+    printf("global not init var: %p\n", &globalNotInit);
+    printf("global const init var: %p\n", &globalConstInit);
+    printf("global const not init var: %p\n", &globalConstNotInit);
 
     printf("returned address from func: %p\n", addressVar());
     tmpFunc();
