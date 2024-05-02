@@ -19,6 +19,8 @@ void workWithPID(char* args[]) {
 }
 
 int main(int argc, char* args[]) {
+    int a = 10;
+    printf("address: %p\n", &a);
     workWithPID(args);
     printf("Hello world\n");
     return 0;

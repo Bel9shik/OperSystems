@@ -34,9 +34,10 @@ void tmpFunc() {
     char *buf1 = (char *) malloc(100);
     strcpy(buf1, "hello world1");
     printf("buf1 in func: %s\n", buf1);
-    buf1 += 50;
+    buf1 = &buf1[0] + 50;
 //    sleep(100);
     free(buf1);
+//    printf("buf[0] = %c", buf1[0]);
     printf("buf1 in func after move pointer: %s\n", buf1);
 }
 
@@ -66,6 +67,7 @@ void workWithEnvVar() {
     env_variable_value = getenv(env_variable_name);
     if (env_variable_value != NULL) {
         printf("Value of environment variable %s: %s\n", env_variable_name, env_variable_value);
+        printf("and he has address: %p\n", &env_variable_value);
     } else {
         printf("Environment variable %s is not set\n", env_variable_name);
     }
