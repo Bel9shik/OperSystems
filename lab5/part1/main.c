@@ -26,8 +26,8 @@ int main() {
 
         a = 20;
         b = 10;
-//        sleep(20);
         printf("child: new a = %d, b = %d\n", a, b);
+        sleep(30);
         return 5;
     } else {
 //        sleep(10);

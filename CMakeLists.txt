@@ -14,6 +14,7 @@ add_executable(OperSystems
 #        lab4/part2/second.c
         lab5/part1/main.c
         lab5/part2/main.c
+        lab6/part1/main.c
         #        lab3/part3/printPID.c
         #        lab3/sdfsdf.cpp
 )

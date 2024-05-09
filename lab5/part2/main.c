@@ -5,8 +5,14 @@
 
 int a = 10;
 
+void sigkillHandler(int signum) {
+    printf("SIGKILL caught\n");
+    exit(signum);
+}
+
 int main() {
 
+//    signal(SIGTERM, sigkillHandler);
     int b = 5;
 
     printf("addr global var 'a' = %p\n", &a);
@@ -32,16 +38,19 @@ int main() {
         if (pid2 < 0) {
             perror("fork error\n");
         } else if (pid2 == 0) {
+            signal(SIGTERM, sigkillHandler);
             printf("child pid: %d, parent pid: %d, grandfather pid: %d\n", getpid(), getppid(), grandFatherPID);
-            sleep(30);
+            sleep(300);
             exit(5);
         } else {
+            signal(SIGTERM, sigkillHandler);
             sleep(10);
-            printf("child became parent");
+            printf("parent became zombie\n");
             exit(5);
         }
     } else {
-        sleep(100);
+        signal(SIGTERM, sigkillHandler);
+        sleep(10000);
         printf("new a = %d, b = %d\n", a, b);
         return 0;
     }
