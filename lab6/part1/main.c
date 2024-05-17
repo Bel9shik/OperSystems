@@ -27,12 +27,13 @@ int main() {
             }
         }
     } else {
-        usleep(500);
         while (1) {
+            usleep(500);
             for (int i = 1; i < PAGE_SIZE / sizeof (unsigned int); ++i) {
-                if ((mappedPtr[i] != mappedPtr[i - 1] + 1)) {
-                    printf("error sequence\n");
-                    printf("cur: %d, prev: %d, i: %d\n\n", mappedPtr[i], mappedPtr[i - 1] + 1, i);
+                int cur = mappedPtr[i];
+                int prev = mappedPtr[i - 1];
+                if ((cur != prev + 1)) {
+                    printf("error sequence\n cur: %d, prev: %d, map(cur):%d, map(prev):%d\n\n", cur, prev, mappedPtr[i], mappedPtr[i - 1]);
                 }
             }
         }

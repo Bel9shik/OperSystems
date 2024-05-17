@@ -19,19 +19,19 @@ int main() {
         unsigned int count = 0;
 
         while (1) {
-            write(pipefd[1], &count, 1); //repeat ?
+            write(pipefd[1], &count, 4);
             count++;
         }
     } else { //parent reads from pipe
         close(pipefd[1]); //close unused write end
-        unsigned int prevValue = 0;
+        unsigned int prevValue;
         unsigned int curValue = 0;
         while (1) {
-            read (pipefd[0], &prevValue, 1);
-            read (pipefd[0], &curValue, 1);
+            prevValue = curValue;
+            read (pipefd[0], &curValue, 4);
+            printf("cur: %d, prev: %d\n\n", curValue, prevValue);
             if (curValue != prevValue + 1) {
                 printf("error sequence\n");
-                printf("cur: %d, prev: %d\n\n", curValue, prevValue);
             }
         }
     }
